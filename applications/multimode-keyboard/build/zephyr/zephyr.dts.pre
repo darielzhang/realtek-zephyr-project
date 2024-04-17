@@ -1,0 +1,748 @@
+# 0 "C:/Users/dariel_zhang/zephyrproject/externals/zephyrproject/zephyr/misc/empty_file.c"
+# 0 "<built-in>"
+# 0 "<command-line>"
+# 1 "C:/Users/dariel_zhang/zephyrproject/beeSDK/zephyr/boards/arm/rtl8762gn_evb/rtl8762gn_evb.dts" 1
+/dts-v1/;
+# 1 "C:/Users/dariel_zhang/zephyrproject/beeSDK/zephyr/dts/arm/rtk/rtl8762gn_evb.dtsi" 1 3 4
+# 1 "C:/Users/dariel_zhang/zephyrproject/externals/zephyrproject/zephyr/dts/common/mem.h" 1 3 4
+# 2 "C:/Users/dariel_zhang/zephyrproject/beeSDK/zephyr/dts/arm/rtk/rtl8762gn_evb.dtsi" 2 3 4
+# 1 "C:/Users/dariel_zhang/zephyrproject/externals/zephyrproject/zephyr/dts/arm/armv8.1-m.dtsi" 1 3 4
+
+
+
+
+
+
+# 1 "C:/Users/dariel_zhang/zephyrproject/externals/zephyrproject/zephyr/dts/common/skeleton.dtsi" 1 3 4
+# 9 "C:/Users/dariel_zhang/zephyrproject/externals/zephyrproject/zephyr/dts/common/skeleton.dtsi" 3 4
+/ {
+ #address-cells = <1>;
+ #size-cells = <1>;
+ chosen { };
+ aliases { };
+};
+# 8 "C:/Users/dariel_zhang/zephyrproject/externals/zephyrproject/zephyr/dts/arm/armv8.1-m.dtsi" 2 3 4
+
+/ {
+ soc {
+  #address-cells = <1>;
+  #size-cells = <1>;
+  compatible = "simple-bus";
+  interrupt-parent = <&nvic>;
+  ranges;
+
+  nvic: interrupt-controller@e000e100 {
+   #address-cells = <1>;
+   compatible = "arm,v8.1m-nvic";
+   reg = <0xe000e100 0xc00>;
+   interrupt-controller;
+   #interrupt-cells = <2>;
+  };
+
+  systick: timer@e000e010 {
+   compatible = "arm,armv8.1m-systick";
+   reg = <0xe000e010 0x10>;
+  };
+ };
+};
+# 3 "C:/Users/dariel_zhang/zephyrproject/beeSDK/zephyr/dts/arm/rtk/rtl8762gn_evb.dtsi" 2 3 4
+# 1 "C:/Users/dariel_zhang/zephyrproject/externals/zephyrproject/zephyr/dts/common/freq.h" 1 3 4
+# 4 "C:/Users/dariel_zhang/zephyrproject/beeSDK/zephyr/dts/arm/rtk/rtl8762gn_evb.dtsi" 2 3 4
+# 1 "C:/Users/dariel_zhang/zephyrproject/beeSDK/zephyr/include/zephyr/dt-bindings/pinctrl/rtl87x2g-pinctrl.h" 1 3 4
+# 5 "C:/Users/dariel_zhang/zephyrproject/beeSDK/zephyr/dts/arm/rtk/rtl8762gn_evb.dtsi" 2 3 4
+# 1 "C:/Users/dariel_zhang/zephyrproject/beeSDK/zephyr/include/zephyr/dt-bindings/clock/rtl87x2g-clocks.h" 1 3 4
+# 6 "C:/Users/dariel_zhang/zephyrproject/beeSDK/zephyr/dts/arm/rtk/rtl8762gn_evb.dtsi" 2 3 4
+# 1 "C:/Users/dariel_zhang/zephyrproject/externals/zephyrproject/zephyr/include/zephyr/dt-bindings/gpio/gpio.h" 1 3 4
+# 7 "C:/Users/dariel_zhang/zephyrproject/beeSDK/zephyr/dts/arm/rtk/rtl8762gn_evb.dtsi" 2 3 4
+# 1 "C:/Users/dariel_zhang/zephyrproject/externals/zephyrproject/zephyr/include/zephyr/dt-bindings/adc/adc.h" 1 3 4
+# 8 "C:/Users/dariel_zhang/zephyrproject/beeSDK/zephyr/dts/arm/rtk/rtl8762gn_evb.dtsi" 2 3 4
+# 1 "C:/Users/dariel_zhang/zephyrproject/externals/zephyrproject/zephyr/include/zephyr/dt-bindings/pwm/pwm.h" 1 3 4
+# 9 "C:/Users/dariel_zhang/zephyrproject/beeSDK/zephyr/dts/arm/rtk/rtl8762gn_evb.dtsi" 2 3 4
+# 1 "C:/Users/dariel_zhang/zephyrproject/externals/zephyrproject/zephyr/include/zephyr/dt-bindings/i2c/i2c.h" 1 3 4
+# 10 "C:/Users/dariel_zhang/zephyrproject/beeSDK/zephyr/dts/arm/rtk/rtl8762gn_evb.dtsi" 2 3 4
+
+/ {
+ chosen {
+ };
+
+ cpus {
+  #address-cells = <1>;
+  #size-cells = <0>;
+
+  cpu: cpu@0 {
+   device_type = "cpu";
+   compatible = "arm,cortex-m55";
+   reg = <0>;
+   #address-cells = <1>;
+   #size-cells = <1>;
+
+   mpu: mpu@e000ed90 {
+    compatible = "arm,armv8.1m-mpu";
+    reg = <0xe000ed90 0x40>;
+    arm,num-mpu-regions = <16>;
+   };
+  };
+ };
+
+    itcm0 {
+  #address-cells = <1>;
+  #size-cells = <1>;
+
+  rom_s: memory@0 {
+   device_type = "secure rom code region";
+   reg = <0x0 ((116) * 1024)>;
+  };
+        rom_ns: memory@1D000 {
+   device_type = "non-secure rom code region";
+   reg = <0x1D000 0x19000>;
+  };
+  lowerstack: memory@36000 {
+   device_type = "lowerstack code region";
+   reg = <0x36000 0x4A000>;
+  };
+ };
+
+ tcm {
+  #address-cells = <1>;
+  #size-cells = <1>;
+
+  ram_data: memory@100c00 {
+   device_type = "ram data region";
+   reg = <0x100c00 0x19000>;
+  };
+  ram_code: memory@119c00 {
+   device_type = "ram code region";
+   compatible = "zephyr,memory-region", "arm,itcm";
+   reg = <0x119c00 0x1A000>;
+   zephyr,memory-region = "ITCM";
+  };
+  heap: memory@133c00 {
+   device_type = "heap region";
+   reg = <0x133c00 0x9000>;
+  };
+ };
+
+ soc {
+  fmc: flash-controller@40022000 {
+   compatible = "realtek,rtl87x2g-flash-controller";
+   reg = <0x40022000 0x400>;
+   #address-cells = <1>;
+   #size-cells = <1>;
+
+   flash: flash@405f000 {
+    compatible = "soc-nv-flash";
+    write-block-size = <1>;
+    erase-block-size = <4096>;
+    reg = <0x405f000 ((644) * 1024)>;
+   };
+  };
+
+  aonwdt: watchdog@40001b60 {
+   compatible = "realtek,rtl87x2g-aon-wdt";
+   reg = <0x40001B60 0x10>;
+   status = "okay";
+  };
+  corewdt: watchdog@40006000 {
+   compatible = "realtek,rtl87x2g-core-wdt";
+   reg = <0x40006000 0x10>;
+   status = "okay";
+  };
+
+  rcu: reset-clock-controller@40002300 {
+   compatible = "realtek,rtl87x2g-rcu";
+   reg = <0x40002300 0x400>;
+   status = "okay";
+
+   cctl: clock-controller {
+    compatible = "realtek,rtl87x2g-cctl";
+    #clock-cells = <1>;
+    status = "okay";
+   };
+  };
+
+  pinctrl: pin-controller@40030000 {
+   compatible = "realtek,rtl87x2g-pinctrl";
+   #address-cells = <1>;
+   #size-cells = <1>;
+   reg = <0x40030000 0x864>;
+
+   gpioa: gpio@40030000 {
+    compatible = "realtek,rtl87x2g-gpio";
+    gpio-controller;
+    #gpio-cells = <2>;
+    reg = <0x40030000 0x64>;
+    clocks = <&cctl 31U>;
+    port = <0>;
+    interrupts = <9 0>, <10 0>, <11 0>, <12 0>, <13 0>, <14 0>;
+    status = "disabled";
+   };
+
+   gpiob: gpio@40030800 {
+    compatible = "realtek,rtl87x2g-gpio";
+    gpio-controller;
+    #gpio-cells = <2>;
+    reg = <0x40030800 0x64>;
+    clocks = <&cctl 30U>;
+    port = <1>;
+    interrupts = <15 0>, <16 0>, <17 0>, <18 0>;
+    status = "disabled";
+   };
+  };
+
+  uart0: serial@40034000 {
+   compatible = "realtek,rtl87x2g-uart";
+   reg = <0x40034000 0x60>;
+   clocks = <&cctl 14U>;
+   interrupts = <34 0>;
+   status = "disabled";
+  };
+
+  uart1: serial@40034400 {
+   compatible = "realtek,rtl87x2g-uart";
+   reg = <0x40034400 0x60>;
+   clocks = <&cctl 13U>;
+   interrupts = <35 0>;
+   status = "disabled";
+  };
+
+  uart2: serial@40034800 {
+   compatible = "realtek,rtl87x2g-uart";
+   reg = <0x40034800 0x60>;
+   clocks = <&cctl 12U>;
+   interrupts = <36 0>;
+   status = "disabled";
+  };
+
+  uart3: serial@40034c00 {
+   compatible = "realtek,rtl87x2g-uart";
+   reg = <0x40034c00 0x60>;
+   clocks = <&cctl 11U>;
+   interrupts = <37 0>;
+   status = "disabled";
+  };
+
+  uart4: serial@40035000 {
+   compatible = "realtek,rtl87x2g-uart";
+   reg = <0x40035000 0x60>;
+   clocks = <&cctl 42U>;
+   interrupts = <38 0>;
+   status = "disabled";
+  };
+
+  uart5: serial@40035400 {
+   compatible = "realtek,rtl87x2g-uart";
+   reg = <0x40035400 0x60>;
+   clocks = <&cctl 41U>;
+   interrupts = <39 0>;
+   status = "disabled";
+  };
+
+  dma0: dma@400242c0 {
+   compatible = "realtek,rtl87x2g-dma";
+   reg = <0x400242c0 0x4b0>;
+   interrupts = <19 0>, <20 0>, <21 0>, <22 0>, <23 0>,
+            <24 0>, <25 0>, <26 0>, <27 0>;
+   dma-channels = <9>;
+   clocks = <&cctl 3U>;
+   dma-port = <0>;
+   #dma-cells = <3>;
+   status = "disabled";
+  };
+
+  adc: adc@40032000 {
+   compatible = "realtek,rtl87x2g-adc";
+   reg = <0x40032000 0x60>;
+   interrupts = <57 0>;
+   clocks = <&cctl 26U>;
+   channels = <8>;
+   status = "disabled";
+   #io-channel-cells = <1>;
+  };
+
+  timer2: timer@40031028 {
+   compatible = "realtek,rtl87x2g-timer";
+   reg = <0x40031028 0x10>;
+   interrupts = <46 0>;
+   channels = <0>;
+   clocks = <&cctl 34U>;
+   status = "disabled";
+
+   pwm {
+    compatible = "realtek,rtl87x2g-pwm";
+    status = "disabled";
+    #pwm-cells = <3>;
+   };
+  };
+
+  timer3: timer@4003103c {
+   compatible = "realtek,rtl87x2g-timer";
+   reg = <0x4003103c 0x10>;
+   interrupts = <47 0>;
+   channels = <0>;
+   clocks = <&cctl 34U>;
+   status = "disabled";
+
+   pwm {
+    compatible = "realtek,rtl87x2g-pwm";
+    status = "disabled";
+    #pwm-cells = <3>;
+   };
+  };
+
+  timer4: timer@40031050 {
+   compatible = "realtek,rtl87x2g-timer";
+   reg = <0x40031050 0x10>;
+   interrupts = <48 0>;
+   channels = <0>;
+   clocks = <&cctl 34U>;
+   status = "disabled";
+
+   pwm {
+    compatible = "realtek,rtl87x2g-pwm";
+    status = "disabled";
+    #pwm-cells = <3>;
+   };
+  };
+
+  timer5: timer@40031064 {
+   compatible = "realtek,rtl87x2g-timer";
+   reg = <0x40031064 0x10>;
+   interrupts = <49 0>;
+   channels = <0>;
+   clocks = <&cctl 34U>;
+   status = "disabled";
+
+   pwm {
+    compatible = "realtek,rtl87x2g-pwm";
+    status = "disabled";
+    #pwm-cells = <3>;
+   };
+  };
+
+  timer6: timer@40031078 {
+   compatible = "realtek,rtl87x2g-timer";
+   reg = <0x40031078 0x10>;
+   interrupts = <50 0>;
+   channels = <0>;
+   clocks = <&cctl 34U>;
+   status = "disabled";
+
+   pwm {
+    compatible = "realtek,rtl87x2g-pwm";
+    status = "disabled";
+    #pwm-cells = <3>;
+   };
+  };
+
+  timer7: timer@4003108c {
+   compatible = "realtek,rtl87x2g-timer";
+   reg = <0x4003108c 0x10>;
+   interrupts = <51 0>;
+   channels = <0>;
+   clocks = <&cctl 34U>;
+   status = "disabled";
+
+   pwm {
+    compatible = "realtek,rtl87x2g-pwm";
+    status = "disabled";
+    #pwm-cells = <3>;
+   };
+  };
+
+  timer8: timer@40017000 {
+   compatible = "realtek,rtl87x2g-timer";
+   reg = <0x40017000 0x400>;
+   interrupts = <52 0>;
+   is-enhanced;
+   channels = <0>;
+   clocks = <&cctl 35U>;
+   status = "disabled";
+
+   pwm {
+    compatible = "realtek,rtl87x2g-pwm";
+    status = "disabled";
+    clocks = <&cctl 37U>;
+    #pwm-cells = <3>;
+   };
+  };
+
+  timer9: timer@40017024 {
+   compatible = "realtek,rtl87x2g-timer";
+   reg = <0x40017024 0x400>;
+   interrupts = <53 0>;
+   is-enhanced;
+   channels = <0>;
+   clocks = <&cctl 35U>;
+   status = "disabled";
+
+   pwm {
+    compatible = "realtek,rtl87x2g-pwm";
+    status = "disabled";
+    clocks = <&cctl 36U>;
+    #pwm-cells = <3>;
+   };
+  };
+
+  timer10: timer@40017048 {
+   compatible = "realtek,rtl87x2g-timer";
+   reg = <0x40017048 0x400>;
+   interrupts = <54 0>;
+   is-enhanced;
+   channels = <0>;
+   clocks = <&cctl 35U>;
+   status = "disabled";
+
+   pwm {
+    compatible = "realtek,rtl87x2g-pwm";
+    status = "disabled";
+    clocks = <&cctl 39U>;
+    #pwm-cells = <3>;
+   };
+  };
+
+  timer11: timer@4001706c {
+   compatible = "realtek,rtl87x2g-timer";
+   reg = <0x4001706c 0x400>;
+   interrupts = <55 0>;
+   is-enhanced;
+   channels = <0>;
+   clocks = <&cctl 35U>;
+   status = "disabled";
+
+   pwm {
+    compatible = "realtek,rtl87x2g-pwm";
+    status = "disabled";
+    clocks = <&cctl 38U>;
+    #pwm-cells = <3>;
+   };
+  };
+
+  rtc: rtc@40001800 {
+   compatible = "realtek,rtl87x2g-rtc";
+   reg = <0x40001800 0x40>;
+   interrupts = <8 0>;
+   channels = <4>;
+   status = "disabled";
+  };
+
+  aon_qdec: aon_qdec@40001bd0 {
+   compatible = "realtek,rtl87x2g-aon_qdec";
+   reg = <0x40001bd0 0x3>;
+   interrupts = <59 0>;
+   status = "disabled";
+  };
+
+  spi0: spi@40013000 {
+   compatible = "realtek,rtl87x2g-spi";
+   reg = <0x40013000 0xf0>;
+   interrupts = <41 0>;
+   clocks = <&cctl 6U>;
+   status = "disabled";
+   #address-cells = <1>;
+   #size-cells = <0>;
+  };
+
+  spi1: spi@40013400 {
+   compatible = "realtek,rtl87x2g-spi";
+   reg = <0x40013400 0xf0>;
+   interrupts = <42 0>;
+   clocks = <&cctl 5U>;
+   status = "disabled";
+   #address-cells = <1>;
+   #size-cells = <0>;
+  };
+
+  kscan: kscan@40037000 {
+   compatible = "realtek,rtl87x2g-kscan";
+   reg = <0x40037000 0x34>;
+   interrupts = <58 0>;
+   clocks = <&cctl 24U>;
+   max-row-size = <12>;
+   max-col-size = <20>;
+   status = "disabled";
+  };
+
+  i2c0: i2c0@40035800 {
+   compatible = "realtek,rtl87x2g-i2c";
+   reg = <0x40035800 0xa0>;
+   clock-frequency = <100000>;
+   #address-cells = <1>;
+   #size-cells = <0>;
+   interrupts = <30 0>;
+   clocks = <&cctl 10U>;
+   status = "disabled";
+  };
+
+  i2c1: i2c1@40035c00 {
+   compatible = "realtek,rtl87x2g-i2c";
+   reg = <0x40035c00 0xa0>;
+   clock-frequency = <100000>;
+   #address-cells = <1>;
+   #size-cells = <0>;
+   interrupts = <31 0>;
+   clocks = <&cctl 9U>;
+   status = "disabled";
+  };
+
+  i2c2: i2c2@40036000 {
+   compatible = "realtek,rtl87x2g-i2c";
+   reg = <0x40036000 0xa0>;
+   clock-frequency = <100000>;
+   #address-cells = <1>;
+   #size-cells = <0>;
+   interrupts = <32 0>;
+   clocks = <&cctl 8U>;
+   status = "disabled";
+  };
+
+  i2c3: i2c3@40036400 {
+   compatible = "realtek,rtl87x2g-i2c";
+   reg = <0x40036400 0xa0>;
+   clock-frequency = <100000>;
+   #address-cells = <1>;
+   #size-cells = <0>;
+   interrupts = <33 0>;
+   clocks = <&cctl 7U>;
+   status = "disabled";
+  };
+
+  trng: trng@400c2400 {
+   compatible = "realtek,rtl87x2g-trng";
+   reg = <0x400c2400 0x68>;
+   status = "disabled";
+  };
+ };
+
+};
+
+&nvic {
+ arm,num-irq-priority-bits = <3>;
+};
+# 3 "C:/Users/dariel_zhang/zephyrproject/beeSDK/zephyr/boards/arm/rtl8762gn_evb/rtl8762gn_evb.dts" 2
+# 1 "C:/Users/dariel_zhang/zephyrproject/beeSDK/zephyr/boards/arm/rtl8762gn_evb/rtl8762gn_evb-pinctrl.dtsi" 1
+
+
+
+
+
+
+
+&pinctrl {
+ uart2_default: uart2_default {
+  group1 {
+   psels = <(((((26) & 0x7FFU) << 0U) | (((9) & 0xFFFFU) << 16U)) | ((((1) & 0x1U) << 14U) | (((1) & 0x1U) << 13U) | (((1) & 0x3U) << 11U)))>,
+   <(((((27) & 0x7FFU) << 0U) | (((10) & 0xFFFFU) << 16U)) | ((((0) & 0x1U) << 14U) | (((1) & 0x1U) << 13U) | (((1) & 0x3U) << 11U)))>;
+  };
+ };
+};
+# 4 "C:/Users/dariel_zhang/zephyrproject/beeSDK/zephyr/boards/arm/rtl8762gn_evb/rtl8762gn_evb.dts" 2
+
+/ {
+ model = "RealTek rtl8762gn evb ";
+ compatible = "rtk,rtl8762gn_evb";
+
+ chosen {
+  zephyr,sram = &ram_data;
+  zephyr,flash = &flash;
+  zephyr,itcm = &ram_code;
+  zephyr,console = &uart2;
+  zephyr,shell-uart = &uart2;
+  zephyr,flash-controller = &fmc;
+  zephyr,entropy = &trng;
+ };
+
+
+ aliases {
+ };
+
+};
+
+&fmc {
+ status = "okay";
+};
+
+&flash {
+ partitions {
+  compatible = "fixed-partitions";
+  #address-cells = <1>;
+  #size-cells = <1>;
+  app_partition: partition@0 {
+   label = "app-image";
+   reg = <0x0 ((628) * 1024)>;
+  };
+  storage_partition: partition@9d000 {
+   label = "storage";
+   reg = <0x9d000 ((16) * 1024)>;
+  };
+ };
+};
+
+&cpu {
+ clock-frequency = <40000000>;
+};
+&uart2 {
+ pinctrl-0 = <&uart2_default>;
+ pinctrl-names = "default";
+ status = "okay";
+ current-speed = <2000000>;
+ parity = "none";
+ stop-bits = "1";
+ data-bits = <8>;
+};
+
+&trng {
+ status = "okay";
+};
+# 0 "<command-line>" 2
+# 1 "C:/Users/dariel_zhang/zephyrproject/beeSDK/applications/zephyr/multimode-keyboard/rtl8762gn_evb.overlay" 1
+&gpioa {
+    status = "okay";
+};
+&gpiob {
+    status = "okay";
+};
+&usb {
+    status = "okay";
+};
+&timer2 {
+    status = "okay";
+    prescaler = <1>;
+    pwm2: pwm {
+        status = "okay";
+        pinctrl-0 = <&pwm2_default>;
+        pinctrl-names = "default";
+    };
+};
+&timer3 {
+    status = "okay";
+    prescaler = <1>;
+    pwm3: pwm {
+        status = "okay";
+        pinctrl-0 = <&pwm3_default>;
+        pinctrl-names = "default";
+    };
+};
+
+&timer4 {
+    status = "okay";
+    prescaler = <1>;
+    pwm4: pwm {
+        status = "okay";
+        pinctrl-0 = <&pwm4_default>;
+        pinctrl-names = "default";
+    };
+};
+
+&timer6 {
+ status = "okay";
+ prescaler = <1>;
+};
+&pinctrl {
+ pwm2_default: pwm2_default {
+  group1 {
+   psels = <(((((76) & 0x7FFU) << 0U) | (((83) & 0xFFFFU) << 16U)) | ((((1) & 0x1U) << 14U) | (((0) & 0x1U) << 13U) | (((0) & 0x3U) << 11U)))>;
+  };
+ };
+ pwm3_default: pwm3_default {
+  group1 {
+   psels = <(((((77) & 0x7FFU) << 0U) | (((84) & 0xFFFFU) << 16U)) | ((((1) & 0x1U) << 14U) | (((0) & 0x1U) << 13U) | (((0) & 0x3U) << 11U)))>;
+  };
+ };
+ pwm4_default: pwm4_default {
+  group1 {
+   psels = <(((((78) & 0x7FFU) << 0U) | (((92) & 0xFFFFU) << 16U)) | ((((1) & 0x1U) << 14U) | (((0) & 0x1U) << 13U) | (((0) & 0x3U) << 11U)))>;
+  };
+ };
+};
+
+/ {
+    chosen {
+        zephyr,keyboard-scan = &kscan;
+    };
+ leds {
+        compatible = "gpio-leds";
+  led_1: led_1 {
+            gpios = <&gpioa 16 (0 << 0)>;
+        };
+  led_2: led_2 {
+            gpios = <&gpioa 28 (0 << 0)>;
+        };
+  led_3: led_3 {
+            gpios = <&gpioa 27 (0 << 0)>;
+        };
+  led_4: led_4 {
+            gpios = <&gpioa 26 (0 << 0)>;
+        };
+  led_5: led_5 {
+            gpios = <&gpioa 25 (0 << 0)>;
+        };
+  led_6: led_6 {
+            gpios = <&gpioa 24 (0 << 0)>;
+        };
+  led_7: led_7 {
+            gpios = <&gpioa 23 (0 << 0)>;
+        };
+    };
+ aliases {
+  led1 = &led_1;
+  led2 = &led_2;
+  led3 = &led_3;
+  led4 = &led_4;
+  led5 = &led_5;
+  led6 = &led_6;
+  led7 = &led_7;
+  pwm1 = &pwm2;
+  pwm2 = &pwm3;
+  pwm3 = &pwm4;
+  kscan0 = &kscan;
+  check-timer = &timer6;
+ };
+ };
+
+&kscan {
+    pinctrl-0 = <&kscan_default>;
+    pinctrl-names = "default";
+    row-size = <8>;
+    col-size = <18>;
+    debounce-time-ms = <10>;
+    scan-time-ms = <10>;
+    release-time-ms = <10>;
+    scan-debounce-cnt = <1>;
+    status = "okay";
+};
+
+&pinctrl {
+    kscan_default: kscan_default {
+        group1 {
+            psels = <(((((4) & 0x7FFU) << 0U) | (((100) & 0xFFFFU) << 16U)) | ((((1) & 0x1U) << 14U) | (((0) & 0x1U) << 13U) | (((2) & 0x3U) << 11U)))>,
+            <(((((35) & 0x7FFU) << 0U) | (((101) & 0xFFFFU) << 16U)) | ((((1) & 0x1U) << 14U) | (((0) & 0x1U) << 13U) | (((2) & 0x3U) << 11U)))>,
+   <(((((34) & 0x7FFU) << 0U) | (((102) & 0xFFFFU) << 16U)) | ((((1) & 0x1U) << 14U) | (((0) & 0x1U) << 13U) | (((2) & 0x3U) << 11U)))>,
+   <(((((33) & 0x7FFU) << 0U) | (((103) & 0xFFFFU) << 16U)) | ((((1) & 0x1U) << 14U) | (((0) & 0x1U) << 13U) | (((2) & 0x3U) << 11U)))>,
+   <(((((32) & 0x7FFU) << 0U) | (((104) & 0xFFFFU) << 16U)) | ((((1) & 0x1U) << 14U) | (((0) & 0x1U) << 13U) | (((2) & 0x3U) << 11U)))>,
+   <(((((6) & 0x7FFU) << 0U) | (((105) & 0xFFFFU) << 16U)) | ((((1) & 0x1U) << 14U) | (((0) & 0x1U) << 13U) | (((2) & 0x3U) << 11U)))>,
+   <(((((5) & 0x7FFU) << 0U) | (((106) & 0xFFFFU) << 16U)) | ((((1) & 0x1U) << 14U) | (((0) & 0x1U) << 13U) | (((2) & 0x3U) << 11U)))>,
+   <(((((72) & 0x7FFU) << 0U) | (((107) & 0xFFFFU) << 16U)) | ((((1) & 0x1U) << 14U) | (((0) & 0x1U) << 13U) | (((2) & 0x3U) << 11U)))>,
+   <(((((55) & 0x7FFU) << 0U) | (((108) & 0xFFFFU) << 16U)) | ((((1) & 0x1U) << 14U) | (((0) & 0x1U) << 13U) | (((2) & 0x3U) << 11U)))>,
+   <(((((10) & 0x7FFU) << 0U) | (((109) & 0xFFFFU) << 16U)) | ((((1) & 0x1U) << 14U) | (((0) & 0x1U) << 13U) | (((2) & 0x3U) << 11U)))>,
+   <(((((53) & 0x7FFU) << 0U) | (((110) & 0xFFFFU) << 16U)) | ((((1) & 0x1U) << 14U) | (((0) & 0x1U) << 13U) | (((2) & 0x3U) << 11U)))>,
+   <(((((51) & 0x7FFU) << 0U) | (((111) & 0xFFFFU) << 16U)) | ((((1) & 0x1U) << 14U) | (((0) & 0x1U) << 13U) | (((2) & 0x3U) << 11U)))>,
+   <(((((50) & 0x7FFU) << 0U) | (((112) & 0xFFFFU) << 16U)) | ((((1) & 0x1U) << 14U) | (((0) & 0x1U) << 13U) | (((2) & 0x3U) << 11U)))>,
+   <(((((49) & 0x7FFU) << 0U) | (((113) & 0xFFFFU) << 16U)) | ((((1) & 0x1U) << 14U) | (((0) & 0x1U) << 13U) | (((2) & 0x3U) << 11U)))>,
+   <(((((73) & 0x7FFU) << 0U) | (((114) & 0xFFFFU) << 16U)) | ((((1) & 0x1U) << 14U) | (((0) & 0x1U) << 13U) | (((2) & 0x3U) << 11U)))>,
+   <(((((52) & 0x7FFU) << 0U) | (((115) & 0xFFFFU) << 16U)) | ((((1) & 0x1U) << 14U) | (((0) & 0x1U) << 13U) | (((2) & 0x3U) << 11U)))>,
+   <(((((2) & 0x7FFU) << 0U) | (((116) & 0xFFFFU) << 16U)) | ((((1) & 0x1U) << 14U) | (((0) & 0x1U) << 13U) | (((2) & 0x3U) << 11U)))>,
+   <(((((1) & 0x7FFU) << 0U) | (((117) & 0xFFFFU) << 16U)) | ((((1) & 0x1U) << 14U) | (((0) & 0x1U) << 13U) | (((2) & 0x3U) << 11U)))>,
+            <(((((0) & 0x7FFU) << 0U) | (((120) & 0xFFFFU) << 16U)) | ((((0) & 0x1U) << 14U) | (((0) & 0x1U) << 13U) | (((1) & 0x3U) << 11U)))>,
+            <(((((15) & 0x7FFU) << 0U) | (((121) & 0xFFFFU) << 16U)) | ((((0) & 0x1U) << 14U) | (((0) & 0x1U) << 13U) | (((1) & 0x3U) << 11U)))>,
+            <(((((13) & 0x7FFU) << 0U) | (((122) & 0xFFFFU) << 16U)) | ((((0) & 0x1U) << 14U) | (((0) & 0x1U) << 13U) | (((1) & 0x3U) << 11U)))>,
+            <(((((31) & 0x7FFU) << 0U) | (((123) & 0xFFFFU) << 16U)) | ((((0) & 0x1U) << 14U) | (((0) & 0x1U) << 13U) | (((1) & 0x3U) << 11U)))>,
+            <(((((30) & 0x7FFU) << 0U) | (((124) & 0xFFFFU) << 16U)) | ((((0) & 0x1U) << 14U) | (((0) & 0x1U) << 13U) | (((1) & 0x3U) << 11U)))>,
+            <(((((29) & 0x7FFU) << 0U) | (((125) & 0xFFFFU) << 16U)) | ((((0) & 0x1U) << 14U) | (((0) & 0x1U) << 13U) | (((1) & 0x3U) << 11U)))>,
+            <(((((28) & 0x7FFU) << 0U) | (((126) & 0xFFFFU) << 16U)) | ((((0) & 0x1U) << 14U) | (((0) & 0x1U) << 13U) | (((1) & 0x3U) << 11U)))>,
+            <(((((27) & 0x7FFU) << 0U) | (((127) & 0xFFFFU) << 16U)) | ((((0) & 0x1U) << 14U) | (((0) & 0x1U) << 13U) | (((1) & 0x3U) << 11U)))>;
+
+  };
+        };
+};
+# 0 "<command-line>" 2
+# 1 "C:/Users/dariel_zhang/zephyrproject/externals/zephyrproject/zephyr/misc/empty_file.c"

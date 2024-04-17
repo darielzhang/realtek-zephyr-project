@@ -1,0 +1,12 @@
+menu "beeSDK (C:/Users/dariel_zhang/zephyrproject/beeSDK)"
+osource "C:/Users/dariel_zhang/zephyrproject/beeSDK/zephyr/Kconfig"
+config ZEPHYR_BEESDK_MODULE
+	bool
+	default y
+endmenu
+menu "cmsis (C:/Users/dariel_zhang/zephyrproject/externals/zephyrproject/modules/hal/cmsis)"
+osource "$(ZEPHYR_CMSIS_KCONFIG)"
+config ZEPHYR_CMSIS_MODULE
+	bool
+	default y
+endmenu

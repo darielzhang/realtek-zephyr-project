@@ -1,0 +1,3 @@
+"beeSDK":"C:/Users/dariel_zhang/zephyrproject/beeSDK":"C:/Users/dariel_zhang/zephyrproject/beeSDK/zephyr"
+"cmsis":"C:/Users/dariel_zhang/zephyrproject/externals/zephyrproject/modules/hal/cmsis":"${ZEPHYR_CMSIS_CMAKE_DIR}"
+"tinycrypt":"C:/Users/dariel_zhang/zephyrproject/externals/zephyrproject/modules/crypto/tinycrypt":"C:/Users/dariel_zhang/zephyrproject/externals/zephyrproject/modules/crypto/tinycrypt"
