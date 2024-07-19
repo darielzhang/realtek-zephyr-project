@@ -1,0 +1,9 @@
+test
+<<<<<<< HEAD
+<<<<<<< HEAD
+test1
+=======
+>>>>>>> f49dfc3 (test)
+=======
+test1
+>>>>>>> 2abb13e (test1)
